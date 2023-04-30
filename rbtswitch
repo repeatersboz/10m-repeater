@@ -1,0 +1,75 @@
+#!/bin/bash
+
+######################################################
+## Reboot / shutdown  the RPi by a momentary switch ##
+## Short press is reboot  /  long press is shutdown ##
+##           v1.07v by NL13716 / 19RF1292           ##
+######################################################
+
+### Set GPIO
+
+       switchgpio=21  ## GPIO pin for switch
+       ledgpio=22     ## GPIO  pin for the LED
+
+### Safe periode | Nothing will happen when the switch is only press shortly
+
+  while :
+   do
+     sleep 1
+       switch=$(cat /sys/class/gpio/gpio$switchgpio/value)
+  if [  "$switch" = "1" ]
+   then
+       ((count=count+1))
+  if [ "$count" = "4" ]
+   then
+
+### Pressing for reboot
+
+  while :
+   do
+       switch=$(cat /sys/class/gpio/gpio$switchgpio/value)
+  if [ "$switch" = "1" ]
+   then
+       ((count=count+1))
+    echo "LED ON"
+     sleep 0.3
+    echo "LED OFF"
+     sleep 0.3
+  fi
+  if [ "$switch" = "0" ]
+   then
+## >> reboot code here
+    echo ""
+    echo "Executing reboot command"
+    echo ""
+     sleep 3
+     exit
+  fi
+
+### Pressing for shutdown
+
+  if [ "$count" = "20" ]
+   then
+    echo "LED ON"
+
+## Wait for switch to be released
+
+  while :
+   do
+       switch=$(cat /sys/class/gpio/gpio$switchgpio/value)
+  if [ "$switch" = "0" ]
+   then
+## >> shutdown code here
+    echo ""
+    echo "Executing shutdown command"
+    echo ""
+     sleep 3
+     exit
+  fi
+    sleep 0.3
+  done
+  fi
+  done
+  fi
+  fi
+  done
