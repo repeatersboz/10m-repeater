@@ -1,0 +1,58 @@
+#!/bin/bash
+
+####################################
+#  HF  amplifier  fan  controller  #
+#  for  PI2BOZ  10m  FM  repeater  #
+####################################
+
+#### Configuration
+      pttpin=21
+      fanpin=13        ## GPIO for fan optocoupler
+      startdelay=30    ## Wait x seconds before fan starts
+      lagtime=5        ## Keep running for x minutes after transmittrer was turned off
+
+#### Convert lagtime for timer
+      timer=$((lagtime*60))
+
+  while :
+   do
+
+### If PTT HIGH
+
+  if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "1" ]
+   then
+     sleep $startdelay
+  if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "1" ]
+   then
+    echo "Turning the fan ON"
+     ## replace the line above with code to set the fan GPIO HIGH ##
+  fi
+
+### If PTT LOW
+
+  while :
+   do
+  if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "0" ]
+   then
+      timer=$((timer-1))
+  if [ "$timer" = "0" ]
+   then
+    echo "Turning the fan OFF"
+     ## replace the line above with code to set the fan GPIO LOW ##
+     break
+  fi
+
+## If PTT HIGH again reset timer
+
+  fi
+     sleep 1
+  if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "1" ]
+   then
+      timer=$((lagtime*60))
+  fi
+  done
+  fi
+
+     sleep 0.1
+
+  done
