@@ -5,12 +5,15 @@ Script for the 10 meter repeater:
 ## Transmitter:
 - Amplifier fan controller
 - Internal fan controller
-- TX LED
+- TX Led
+- RX UP Led
 
 ## Common:
-- RPi up LED
-- Svxlink up LED
+- RPi up Led
+- Svxlink up Led
+- Reboot / Shutdown Led 
 - Reboot / shutdown switch
 
 ## Receiver:
 - SQL LED
+- TX UP Led
