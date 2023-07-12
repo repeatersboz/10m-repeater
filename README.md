@@ -15,5 +15,6 @@ Script for the 10 meter repeater:
 - Reboot / shutdown switch
 
 ## Receiver:
+- Internal fan controller
 - SQL LED
 - TX UP Led
