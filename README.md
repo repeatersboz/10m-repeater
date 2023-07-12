@@ -12,7 +12,7 @@ Script for the 10 meter repeater:
 - RPi up Led
 - Svxlink up Led
 - Reboot / Shutdown Led 
-- Reboot / shutdown switch
+- Reboot / Shutdown switch
 
 ## Receiver:
 - Internal fan controller
