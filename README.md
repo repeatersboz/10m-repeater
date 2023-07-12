@@ -14,5 +14,5 @@ Script for the 10 meter repeater:
 
 ## Receiver:
 - Internal fan controller
-- SQL LED
+- Squelch LED
 - TX UP Led
