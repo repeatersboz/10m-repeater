@@ -1,6 +1,6 @@
 # 10m repeater
 
-Script for the 10 meter repeater:
+Scripts for the 10 meter repeater
 
 ## Transmitter:
 - Amplifier fan controller
