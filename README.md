@@ -4,7 +4,7 @@ Scripts for the 10 meter repeater
 
 ## Transmitter:
 - Amplifier fan controller
-- Internal fan controller
+- Case fan controller
 - TX Led
 - RX UP Led
 
@@ -13,6 +13,6 @@ Scripts for the 10 meter repeater
 - Reboot / Shutdown Led & Switch
 
 ## Receiver:
-- Internal fan controller
+- Case fan controller
 - Squelch LED
 - TX UP Led
