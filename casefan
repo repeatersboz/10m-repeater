@@ -1,0 +1,51 @@
+#!/bin/bash
+
+### Config                      ## Values are in degrees celcius and seconds
+
+     sensdir=/etc/ncbr/tmp/     ## Directory thgat contaions the value
+     maxcase=26                 ## Fan on if case temperature is egal to or higher than this vaule
+     maxrpi=63                  ## Fan on if RPi CPU temperature is egal to or higher than this value
+     onint=30                   ## Measure interval to switch fan on
+     offint=10                  ## Measure interval to switch fan off
+     afluct=60                  ## Wait this long after fan has been switched off to avoid trigger on small fluctuation
+
+    echo "off" > /$sensdir/casefan.sts
+
+  while :
+   do
+
+### Get temperatures
+
+## Case
+     casetemp=$(cat $sensdir/temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+
+## RPi CPU
+     rpitemp=$(/usr/bin/vcgencmd measure_temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+
+### Triggers
+
+## Switch on at trigger
+  if [ "$casetemp" -ge "$maxcase" ] || [ "$rpitemp" -ge "$maxrpi" ]
+   then
+    echo "on" > /$sensdir/casefan.sts
+    echo "fan on"   ## replace this by code to switch GPIO
+
+## Switch off when below trigger level
+  while :
+   do
+     casetemp=$(cat $sensdir/temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+     rpitemp=$(/usr/bin/vcgencmd measure_temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+  if [ "$casetemp" -lt "$maxcase" ] && [ "$rpitemp" -lt "$maxrpi" ]
+   then
+    echo "off" > /$sensdir/casefan.sts
+    echo "fan off"   ## replace this by code to switch GPIO
+      sleep $afluct
+      break
+  fi
+      sleep $offint
+  done
+  fi
+
+      sleep $onint
+
+  done
