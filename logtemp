@@ -1,5 +1,10 @@
 #!/bin/bash
 
+####################################
+#  Log  temperature  to  ramdrive  #
+#  for  PI2BOZ  10m  FM  repeater  #
+####################################
+
 ### Config
 
      pin=7                     ## Sensoir pin (NOT GPIO number!)
