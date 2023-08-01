@@ -1,5 +1,10 @@
 #!/bin/bash
 
+####################################
+#     Case   fan    controller     #
+#  for  PI2BOZ  10m  FM  repeater  #
+####################################
+
 ### Config                      ## Values are in degrees celcius and seconds
 
      sensdir=/etc/ncbr/tmp/     ## Directory thgat contaions the value
