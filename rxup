@@ -1,5 +1,10 @@
 #!/bin/bash
 
+####################################
+#       RX      UP       LED       #
+#  for  PI2BOZ  10m  FM  repeater  #
+####################################
+
 ### Config
      hst=10.3.0.7        ## IP address of host to ping
      to=1                ## Ping can take this long before it fails
