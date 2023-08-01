@@ -17,5 +17,5 @@ Scripts for the 10 meter repeater
 - Squelch LED
 - TX UP Led
 
-## Remakrs & notes
+## Remarks & notes
 The case temperature is logged by the DHT22 module. This needs the wireingpi library en the lol_dht22 package.
