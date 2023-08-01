@@ -16,3 +16,5 @@ Scripts for the 10 meter repeater
 ## Receiver:
 - Squelch LED
 - TX UP Led
+
+The case temperature is logged by the DHT22 module. This needs the wireingpi library en the lol_dht22 package.
