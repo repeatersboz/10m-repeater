@@ -6,6 +6,7 @@ Scripts for the 10 meter repeater
 - RPi up Led
 - Reboot / Shutdown Led & Switch
 - Case fan controller
+- Temperature logger
 
 ## Transmitter:
 - Amplifier fan controller
