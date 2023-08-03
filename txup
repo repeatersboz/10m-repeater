@@ -12,7 +12,7 @@
      int=60              ## Check interval in seconds
      gpio=19             ## GPIO for LED
 
-### Set GPIO
+### Initialize GPIO
   if [ ! -d /sys/class/gpio/gpio$gpio ]
 then
     echo "$gpio" > /sys/class/gpio/export
