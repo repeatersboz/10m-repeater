@@ -6,10 +6,22 @@
 ##           v1.07v by NL13716 / 19RF1292           ##
 ######################################################
 
-### Set GPIO
-
+### Config
        switchgpio=21  ## GPIO pin for switch
        ledgpio=22     ## GPIO  pin for the LED
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+then
+    echo "$switchgpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$switchgpio/direction
+  fi
+
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+then
+    echo "$ledgpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$ledgpio/direction
+  fi
 
 ### Safe periode | Nothing will happen when the switch is only press shortly
 
