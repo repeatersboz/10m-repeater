@@ -5,16 +5,15 @@
 #  for  PI2BOZ  10m  FM  repeater  #
 ####################################
 
-
+### Config
      pttgpio=$(sed -n -e '/PTT_PIN/ s/.*\= *//p' /etc/svxlink/svxlink.conf | sed 's/gpio//')
+     ledgpio=6
 
- . /etc/repeater/leds.conf
-
-### Initialize GPIO
-  if [ ! -d /sys/class/gpio/gpio$txgpio ]
+ ### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$ledgpio ]
    then
-    echo "$txgpio" > /sys/class/gpio/export
-    echo "out" > /sys/class/gpio/gpio$txgpio/direction
+    echo "$ledgpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$ledgpio/direction
   fi
 
   while :
@@ -28,7 +27,7 @@
 ## If not already ON
   if [ "$tx" != "alreadyon" ]
    then
-    echo "1" > /sys/class/gpio/gpio$txgpio/value
+    echo "1" > /sys/class/gpio/gpio$ledgpio/value
      tx="alreadyon"
   fi
   fi
@@ -41,7 +40,7 @@
 ## If not already OFF
   if [ "$tx" != "alreadyoff" ]
    then
-   echo "0" > /sys/class/gpio/gpio$txgpio/value
+   echo "0" > /sys/class/gpio/gpio$ledgpio/value
      tx="alreadyoff"
   fi
   fi
