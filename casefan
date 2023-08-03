@@ -13,6 +13,14 @@
      onint=30                   ## Measure interval to switch fan on
      offint=10                  ## Measure interval to switch fan off
      afluct=60                  ## Wait this long after fan has been switched off to avoid trigger on small fluctuation
+     gpio=17                    ## GPIO for casefan relay
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+then
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+  fi
 
     echo "off" > /$sensdir/casefan.sts
 
@@ -33,7 +41,8 @@
   if [ "$casetemp" -ge "$maxcase" ] || [ "$rpitemp" -ge "$maxrpi" ]
    then
     echo "on" > /$sensdir/casefan.sts
-    echo "fan on"   ## replace this by code to switch GPIO
+    echo "fan on"   ## remove this line when script is OK
+    echo "1" > /sys/class/gpio/gpio$gpio/value
 
 ## Switch off when below trigger level
   while :
@@ -43,8 +52,9 @@
   if [ "$casetemp" -lt "$maxcase" ] && [ "$rpitemp" -lt "$maxrpi" ]
    then
     echo "off" > /$sensdir/casefan.sts
-    echo "fan off"   ## replace this by code to switch GPIO
-      sleep $afluct
+    echo "fan off"   ## remove this line when script is OK
+    echo "0" > /sys/class/gpio/gpio$gpio/value
+     sleep $afluct
       break
   fi
       sleep $offint
