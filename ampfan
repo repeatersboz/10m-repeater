@@ -31,7 +31,6 @@ then
      sleep $startdelay
   if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "1" ]
    then
-    echo "Turning the fan ON"   ## replace the line above with code to set the fan GPIO HIGH ##
     echo "1" > /sys/class/gpio/gpio$gpio/value
   fi
 
@@ -44,7 +43,6 @@ then
       timer=$((timer-1))
   if [ "$timer" = "0" ]
    then
-    echo "Turning the fan OFF"   ## replace the line above with code to set the fan GPIO LOW ##
     echo "0" > /sys/class/gpio/gpio$gpio/value
      break
   fi
