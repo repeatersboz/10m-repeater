@@ -5,14 +5,15 @@
 #  for  PI2BOZ  10m  FM  repeater  #
 ####################################
 
- . /etc/repeater/leds.conf
+### Config
+      gpio=26
 
 ### Initialize GPIO
-  if [ ! -d /sys/class/gpio/gpio$rpigpio ]
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
    then
-    echo "$rpigpio" > /sys/class/gpio/export
-    echo "out" > /sys/class/gpio/gpio$rpigpio/direction
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
   fi
 
-### Turn Power LED oON
-    echo "1" > /sys/class/gpio/gpio$rpigpio/value
+### Turn Power LED ON
+    echo "1" > /sys/class/gpio/gpio$gpio/value
