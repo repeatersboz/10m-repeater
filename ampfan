@@ -6,7 +6,7 @@
 ####################################
 
 #### Configuration
-      pttpin=21        ## PTT pin
+      pttpin=$(sed -n -e '/PTT_PIN/ s/.*\= *//p' /etc/svxlink/svxlink.conf | sed 's/gpio//')
       gpio=27          ## GPIO for fan relay
       startdelay=30    ## Wait x seconds before fan starts
       lagtime=5        ## Keep running for x minutes after transmittrer was turned off
