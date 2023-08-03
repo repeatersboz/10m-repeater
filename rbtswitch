@@ -7,8 +7,8 @@
 ######################################################
 
 ### Config
-       switchgpio=21  ## GPIO pin for switch
-       ledgpio=22     ## GPIO  pin for the LED
+       switchgpio=22  ## GPIO pin for switch
+       ledgpio=13     ## GPIO  pin for the LED
 
 ### Initialize GPIO
   if [ ! -d /sys/class/gpio/gpio$gpio ]
