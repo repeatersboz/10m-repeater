@@ -9,7 +9,7 @@
      hst=10.10.10.101    ## IP address of host to ping
      to=1                ## Ping can take this long before it fails
      t=1                 ## Number of pings
-     int=60              ## Check interval in seconds
+     int=300             ## Check interval in seconds
      gpio=19             ## GPIO for LED
 
 ### Initialize GPIO
