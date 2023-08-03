@@ -6,7 +6,7 @@
 ####################################
 
 ### Config
-     hst=10.3.0.7        ## IP address of host to ping
+     hst=10.10.10.102    ## IP address of host to ping
      to=1                ## Ping can take this long before it fails
      t=1                 ## Number of pings
      int=60              ## Check interval in seconds
