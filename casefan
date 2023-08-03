@@ -41,7 +41,6 @@ then
   if [ "$casetemp" -ge "$maxcase" ] || [ "$rpitemp" -ge "$maxrpi" ]
    then
     echo "on" > /$sensdir/casefan.sts
-    echo "fan on"   ## remove this line when script is OK
     echo "1" > /sys/class/gpio/gpio$gpio/value
 
 ## Switch off when below trigger level
@@ -52,7 +51,6 @@ then
   if [ "$casetemp" -lt "$maxcase" ] && [ "$rpitemp" -lt "$maxrpi" ]
    then
     echo "off" > /$sensdir/casefan.sts
-    echo "fan off"   ## remove this line when script is OK
     echo "0" > /sys/class/gpio/gpio$gpio/value
      sleep $afluct
       break
