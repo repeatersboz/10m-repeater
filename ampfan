@@ -6,10 +6,17 @@
 ####################################
 
 #### Configuration
-      pttpin=21
-      fanpin=13        ## GPIO for fan optocoupler
+      pttpin=21        ## PTT pin
+      gpio=27          ## GPIO for fan relay
       startdelay=30    ## Wait x seconds before fan starts
       lagtime=5        ## Keep running for x minutes after transmittrer was turned off
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+then
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+  fi
 
 #### Convert lagtime for timer
       timer=$((lagtime*60))
@@ -24,8 +31,8 @@
      sleep $startdelay
   if [ "$(cat /sys/class/gpio/gpio$pttpin/value)" = "1" ]
    then
-    echo "Turning the fan ON"
-     ## replace the line above with code to set the fan GPIO HIGH ##
+    echo "Turning the fan ON"   ## replace the line above with code to set the fan GPIO HIGH ##
+    echo "1" > /sys/class/gpio/gpio$gpio/value
   fi
 
 ### If PTT LOW
@@ -37,8 +44,8 @@
       timer=$((timer-1))
   if [ "$timer" = "0" ]
    then
-    echo "Turning the fan OFF"
-     ## replace the line above with code to set the fan GPIO LOW ##
+    echo "Turning the fan OFF"   ## replace the line above with code to set the fan GPIO LOW ##
+    echo "0" > /sys/class/gpio/gpio$gpio/value
      break
   fi
 
