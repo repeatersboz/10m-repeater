@@ -13,7 +13,7 @@
      gpio=19             ## GPIO for LED
 
 ### Set GPIO
-  if [ "$(cat /sys/class/gpio/gpio$gpio/value)" != "0" ] && [ "$(cat /sys/class/gpio/gpio$gpio/value)" != "1" ]
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
    then
     echo "$gpio" > /sys/class/gpio/export
     echo "out" > /sys/class/gpio/gpio$gpio/direction
