@@ -18,4 +18,4 @@ Scripts for the 10 meter repeater
 - TX UP Led
 
 ## Remarks & notes
-The case temperature is logged by the DHT22 module. This requiers the wiringpi library en the lol_dht22 package.
+The case temperature is logged by the DHT22 module. This requiers the wiringpi library and the lol_dht22 package.
