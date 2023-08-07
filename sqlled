@@ -1,0 +1,53 @@
+#!/bin/bash
+
+####################################
+#        Squelch        Led        #
+#  for  PI2BOZ  10m  FM  repeater  #
+# V1.01beta  by NL13716 / 19RF1292 #
+####################################
+
+## (testing on NCBR)
+
+### Config
+     ledgpio=12
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$ledgpio ]
+   then
+    echo "$ledgpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$ledgpio/direction
+  fi
+
+### Led state on script start
+
+     sts=$(tail -n3 /var/log/remotetrx)
+  if [[ "$sts" == *"OPEN"* ]]
+   then
+    echo "1" > /sys/class/gpio/gpio$ledgpio/value
+    echo "open"
+  fi
+
+     tail -f -n3 /var/log/remotetrx | grep -q "The squelch is CLOSED"
+    echo "0" > /sys/class/gpio/gpio$ledgpio/value
+    echo "closed"
+
+### Led control
+
+  while :
+  do
+
+## If squelch is open
+
+      tail -f -n0 /var/log/remotetrx | grep -q "The squelch is OPEN"
+    echo "1" > /sys/class/gpio/gpio$ledgpio/value
+    echo "open"
+
+## If squelchg is closed
+
+     tail -f -n0 /var/log/remotetrx | grep -q "The squelch is CLOSED"
+    echo "0" > /sys/class/gpio/gpio$ledgpio/value
+    echo "closed"
+
+     sleep 0.1
+
+  done
