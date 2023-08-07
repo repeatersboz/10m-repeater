@@ -6,7 +6,7 @@
 # V1.02beta  by NL13716 / 19RF1292 #
 ####################################
 
-## (testing on NCBR)
+## (testing on NCBR PMR RX BoZ)
 
      sts=$(tail -n3 /var/log/remotetrx)
   if [[ "$sts" == *"OPEN"* ]]
