@@ -17,4 +17,4 @@
 - RX UP led
 
 ## DHT22 Temperature sensor
-This requiers the loldht22 packages and wiringpi library
+This requiers the loldht22 package and the wiringpi library.
