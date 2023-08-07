@@ -1,8 +1,10 @@
 
 WiringPi librairies
 -------------------
-wget https://project-downloads.drogon.net/wiringpi-latest.deb
-sudo dpkg -i wiringpi-latest.deb
+(origin: wget https://project-downloads.drogon.net/wiringpi-latest.deb)
+See /dht22/
+sudo dpkg -i wiringpi-2.52-arm32.deb
+sudo dpkg -i wiringpi-2.61-1-arm64.deb
 
 loldht
 ------
