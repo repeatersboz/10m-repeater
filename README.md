@@ -16,5 +16,5 @@
 - TX led
 - RX UP led
 
-## DHT22 Temperature sensor
+## DHT22 temperature sensor
 This requiers the loldht22 package and the wiringpi library.
