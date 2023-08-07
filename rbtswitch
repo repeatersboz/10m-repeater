@@ -1,10 +1,10 @@
 #!/bin/bash
 
-######################################################
-## Reboot / shutdown  the RPi by a momentary switch ##
-## Short press is reboot  /  long press is shutdown ##
-##           v1.07v by NL13716 / 19RF1292           ##
-######################################################
+####################################
+#   RPi Shutdown / reboot s witch  #
+#  for  PI2BOZ  10m  FM  repeater  #
+#  V1.03rc2 by NL13716 / 19RF1292  #
+####################################
 
 ### Config
        switchgpio=22  ## GPIO pin for switch
