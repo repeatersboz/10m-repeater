@@ -1,0 +1,19 @@
+#!/bin/bash
+
+####################################
+#    Raspberry   Pi    up   led    #
+#  for  PI2BOZ  10m  FM  repeater  #
+####################################
+
+### Config
+      gpio=26
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+   then
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+  fi
+
+### Turn Power LED ON
+    echo "1" > /sys/class/gpio/gpio$gpio/value
