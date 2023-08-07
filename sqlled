@@ -6,8 +6,6 @@
 #  V1.04rc2 by NL13716 / 19RF1292  #
 ####################################
 
-## (testing on NCBR)
-
 ### Config
      ledgpio=12
 
