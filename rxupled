@@ -1,0 +1,50 @@
+#!/bin/bash
+
+####################################
+#       RX      UP       LED       #
+#  for  PI2BOZ  10m  FM  repeater  #
+#  V1.04rc2 by NL13716 / 19RF1292  #
+####################################
+
+### Config
+     hst=10.2.10.102     ## IP address of host to ping
+     to=1                ## Ping can take this long before it fails
+     t=1                 ## Number of pings
+     int=10              ## Check interval in seconds
+     gpio=19             ## GPIO for LED
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+   then
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+  fi
+
+  while :
+   do
+
+## Ping host
+  if ping -c$t -w$to $hst >/dev/null 2>&1
+   then
+
+## If UP
+
+  if [ "$(cat /sys/class/gpio/gpio$gpio/value)" = "0" ]
+   then
+    echo "1" > /sys/class/gpio/gpio$gpio/value
+  fi
+
+  else
+
+## If DOWN
+
+  if [ "$(cat /sys/class/gpio/gpio$gpio/value)" = "1" ]
+   then
+    echo "0" > /sys/class/gpio/gpio$gpio/value
+  fi
+
+  fi
+
+      sleep $int
+
+  done

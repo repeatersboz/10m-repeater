@@ -1,0 +1,65 @@
+#!/bin/bash
+
+####################################
+#     Case   fan    controller     #
+#  for  PI2BOZ  10m  FM  repeater  #
+#  V1.04rc2 by NL13716 / 19RF1292  #
+####################################
+
+### Config                          ## Values are in degrees celcius and seconds
+
+     sensdir=/etc/repeater/tmp/     ## Directory thgat contaions the value
+     maxcase=30                     ## Fan on if case temperature is egal to or higher than this vaule
+     maxrpi=55                      ## Fan on if RPi CPU temperature is egal to or higher than this value
+     onint=30                       ## Measure interval to switch fan on
+     offint=10                      ## Measure interval to switch fan off
+     afluct=60                      ## Wait this long after fan has been switched off to avoid trigger on small fluctuation
+     gpio=17                        ## GPIO for casefan relay
+
+### Initialize GPIO
+  if [ ! -d /sys/class/gpio/gpio$gpio ]
+then
+    echo "$gpio" > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+  fi
+
+    echo "off" > /$sensdir/casefan.sts
+
+  while :
+   do
+
+### Get temperatures
+
+## Case
+     casetemp=$(cat $sensdir/temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+
+## RPi CPU
+     rpitemp=$(/usr/bin/vcgencmd measure_temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+
+### Triggers
+
+## Switch on at trigger
+  if [ "$casetemp" -ge "$maxcase" ] || [ "$rpitemp" -ge "$maxrpi" ]
+   then
+    echo "on" > /$sensdir/casefan.sts
+    echo "1" > /sys/class/gpio/gpio$gpio/value
+
+## Switch off when below trigger level
+  while :
+   do
+     casetemp=$(cat $sensdir/temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+     rpitemp=$(/usr/bin/vcgencmd measure_temp | sed s/"temp="// | sed s/"'C"// | cut -c -2)
+  if [ "$casetemp" -lt "$maxcase" ] && [ "$rpitemp" -lt "$maxrpi" ]
+   then
+    echo "off" > /$sensdir/casefan.sts
+    echo "0" > /sys/class/gpio/gpio$gpio/value
+     sleep $afluct
+      break
+  fi
+      sleep $offint
+  done
+  fi
+
+      sleep $onint
+
+  done

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+####################################
+#  Log  temperature  to  ramdrive  #
+#  for  PI2BOZ  10m  FM  repeater  #
+#  V1.04rc2 by NL13716 / 19RF1292  #
+####################################
+
+### Config
+
+     pin=7                         ## Sensoir pin (NOT GPIO number!)
+     logdir=/etc/repeater/tmp/     ## Log directory
+     tmpfile=temp                  ## Logfile for temperature value
+     humfile=hum                   ## Logfile for humidity value
+     mesint=2                      ## Measure interval in seconds
+
+  while :
+   do
+
+### Get values from DHT22
+
+     input=$(/opt/loldht $pin | grep "Temperature")
+     hum=$(echo $input | cut -d " " -f3 | cut -c -4)
+     temp=$(echo $input | cut -d " " -f7 | cut -c -4)
+
+## Calibration
+
+# Temperature
+     offset=0.0
+     dir=-
+     temp=$(calc $temp $dir $offset)
+
+# Humidity
+     offset=0.0
+     dir=-
+     hum=$(calc $hum $dir $offset)
+
+## Log values
+    echo $hum > /$logdir/$humfile
+    echo $temp > /$logdir/$tmpfile
+
+      sleep $mesint
+
+  done
