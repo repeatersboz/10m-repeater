@@ -2,16 +2,16 @@
 
 ## Scripts for the 10m repeater
 
-## Common
+### Common
 - Casefan
 - RPi UP led
 - Reboot / shutdown switch
 
-## Receiver
+### Receiver
 - Squelch led
 - TX UP led
 
-## Core / Transmitter
+### Core / Transmitter
 - Amplifier fan
 - TX led
 - RX UP led
