@@ -1,0 +1,24 @@
+#!/bin/bash
+
+####################################
+#       Squelch       status       #
+#  for  PI2BOZ  10m  FM  repeater  #
+# V1.01beta  by NL13716 / 19RF1292 #
+####################################
+
+## (testing on NCBR)
+
+    echo "unknown" > /etc/ncbr/tmp/sql.sts
+
+  while :
+   do
+
+      sql=$(tail -f -n0 /var/log/remotetrx | grep -q "The squelch is OPEN")
+    echo "open" > /etc/ncbr/tmp/sql.sts
+
+     sql=$(tail -f -n0 /var/log/remotetrx | grep -q "The squelch is CLOSED")
+    echo "closed" > /etc/ncbr/tmp/sql.sts
+
+     sleep 0.1
+
+  done
