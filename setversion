@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#########################################################
+#    Sets the  version number of  the NCBR RPi image    #
+# (C)2022 NCBR | National CB Repeater | The Netherlands #
+#########################################################
+
+### Get current version number
+     current="$(cat /etc/repeater/version| sed s/echo//g)"
+
+### Check if version number is specified on CLI
+  if [ "$1" = "" ];
+   then
+    echo ""
+    echo "No version number to set specified."
+    echo "Current version is$current."
+    echo ""
+      exit
+  fi
+
+### Write new version number to /etc/ncbr/version
+    echo ""
+    echo "Setting version from$current to $1_RPi."
+    echo "echo $1_RPi" > /etc/repeater/version
+    echo ""

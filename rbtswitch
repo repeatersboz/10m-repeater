@@ -11,14 +11,14 @@
        ledgpio=13     ## GPIO  pin for the LED
 
 ### Initialize GPIO
-  if [ ! -d /sys/class/gpio/gpio$gpio ]
-then
+  if [ ! -d /sys/class/gpio/gpio$switchgpio ]
+   then
     echo "$switchgpio" > /sys/class/gpio/export
-    echo "out" > /sys/class/gpio/gpio$switchgpio/direction
+    echo "in" > /sys/class/gpio/gpio$switchgpio/direction
   fi
 
-  if [ ! -d /sys/class/gpio/gpio$gpio ]
-then
+  if [ ! -d /sys/class/gpio/gpio$ledgpio ]
+   then
     echo "$ledgpio" > /sys/class/gpio/export
     echo "out" > /sys/class/gpio/gpio$ledgpio/direction
   fi
@@ -43,16 +43,17 @@ then
   if [ "$switch" = "1" ]
    then
        ((count=count+1))
-    echo "LED ON"
-     sleep 0.3
-    echo "LED OFF"
-     sleep 0.3
+    echo 1 >/sys/class/gpio/gpio$ledgpio/value
+      sleep 0.3
+    echo 0 >/sys/class/gpio/gpio13/value
+      sleep 0.3
   fi
   if [ "$switch" = "0" ]
    then
 ## >> reboot code here
     echo ""
     echo "Executing reboot command"
+      sudo reboot
     echo ""
      sleep 3
      exit
@@ -62,7 +63,7 @@ then
 
   if [ "$count" = "20" ]
    then
-    echo "LED ON"
+    echo 1 >/sys/class/gpio/gpio$ledgpio/value
 
 ## Wait for switch to be released
 
@@ -74,6 +75,7 @@ then
 ## >> shutdown code here
     echo ""
     echo "Executing shutdown command"
+      sudo shutdown now
     echo ""
      sleep 3
      exit
