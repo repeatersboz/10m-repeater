@@ -21,16 +21,13 @@
 ### Led state on script start
 
     echo "0" > /sys/class/gpio/gpio$ledgpio/value
-    echo "closed"
-
+   
       tail -f -n3 /var/log/remotetrx | grep -q "The squelch is OPEN"
     echo "1" > /sys/class/gpio/gpio$ledgpio/value
-    echo "open"
-
+  
       tail -f -n0 /var/log/remotetrx | grep -q "The squelch is CLOSED"
     echo "0" > /sys/class/gpio/gpio$ledgpio/value
-    echo "closed"
-
+  
 ### Led control
 
   while :
@@ -40,13 +37,11 @@
 
       tail -f -n0 /var/log/remotetrx | grep -q "The squelch is OPEN"
     echo "1" > /sys/class/gpio/gpio$ledgpio/value
-    echo "open"
-
+ 
 ## If squelchg is closed
 
      tail -f -n0 /var/log/remotetrx | grep -q "The squelch is CLOSED"
     echo "0" > /sys/class/gpio/gpio$ledgpio/value
-    echo "closed"
 
      sleep 0.1
 
