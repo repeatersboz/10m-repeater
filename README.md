@@ -1,4 +1,4 @@
-# 10m repeater PI2BOZ
+# PI2BOZ 10m repeater
 
 ## Scripts for the 10m repeater
 
