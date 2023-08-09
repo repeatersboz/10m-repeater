@@ -23,6 +23,10 @@
      hum=$(echo $input | cut -d " " -f3 | cut -c -4)
      temp=$(echo $input | cut -d " " -f7 | cut -c -4)
 
+## Capture false trigger
+ 
+    ### Code to capture false triggers here ###
+
 ## Calibration
 
 # Temperature
