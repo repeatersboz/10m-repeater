@@ -3,13 +3,13 @@
 ####################################
 #  Log  temperature  to  ramdrive  #
 #  for  PI2BOZ  10m  FM  repeater  #
-#  V1.04rc3 by NL13716 / 19RF1292  #
+#  V1.04rc4 by NL13716 / 19RF1292  #
 ####################################
 
 ### Config
 
      pin=7                         ## Sensoir pin (NOT GPIO number!)
-     logdir=/etc/repeater/tmp/     ## Log directory
+     logdir=/etc/ncbr/tmp/     ## Log directory
      tmpfile=temp                  ## Logfile for temperature value
      humfile=hum                   ## Logfile for humidity value
      mesint=2                      ## Measure interval in seconds
@@ -28,10 +28,12 @@
 ## Capture false trigger | !! Test !!
 
      diff=$(calc $temp-$lasttemp | sed 's/..$//')
-
+  if [ "$diff" != "" ]
+   then
   if [ "$diff" -gt "$fread" ] || [ "$diff" -lt "$fread" ]
    then
      temp=$lasttemp
+  fi
   fi
 
     ###
