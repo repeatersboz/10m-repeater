@@ -9,7 +9,7 @@
 ### Config
 
      pin=7                         ## Sensoir pin (NOT GPIO number!)
-     logdir=/etc/ncbr/tmp/     ## Log directory
+     logdir=/etc/repeater/tmp/     ## Log directory
      tmpfile=temp                  ## Logfile for temperature value
      humfile=hum                   ## Logfile for humidity value
      mesint=2                      ## Measure interval in seconds
