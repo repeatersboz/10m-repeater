@@ -25,7 +25,7 @@
      temp=$(echo $input | cut -d " " -f7 | cut -c -4)
      lasttemp=$temp
 
-## Capture false trigger 
+## Capture false reading 
 
      diff=$(calc $temp-$lasttemp | sed 's/..$//')
   if [ "$diff" != "" ]
