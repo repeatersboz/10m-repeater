@@ -8,7 +8,7 @@
 
 ### Config
 
-     pin=7                         ## Sensoir pin (NOT GPIO number!)
+     pin=7                         ## Sensor pin (NOT GPIO number!)
      logdir=/etc/repeater/tmp/     ## Log directory
      tmpfile=temp                  ## Logfile for temperature value
      humfile=hum                   ## Logfile for humidity value
